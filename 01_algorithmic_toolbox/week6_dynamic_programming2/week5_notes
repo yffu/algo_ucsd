@@ -1,0 +1,179 @@
+#1 Maximum Amount of Gold
+
+10 3
+1 4 8
+
+9
+
+118 6
+59 34 57 67 1 18
+
+118
+
+first number is capacity of bag
+second number is number of gold bars
+
+either it contains the last item, or it doesn't contain it.
+if it contains, the subproblem is W-w_n with items i...n-1
+if it does not contain, the subproblem is W with items i...n-1
+
+value(w,i) is the maximum value achievable using a knapsack of weight w and items 1....i
+
+value(w,i) = max{value(w-wi, i-1)+ vi, value(w, i-1)}
+
+value(0,j) <- 0  no items means no value
+value(w,0) <- 0 no weight means no value
+
+check value of same knapsack with i-1 items.
+then check if we can improve value with using the w_i item.
+the weight of new item does not exceed weight of knapsack.
+
+use a 2-d array of W x j
+
+20 4
+5 7 12 18
+
+Your output:
+
+Your stderr:
+Traceback (most recent call last):
+  File "knapsack.py", line 33, in <module>
+    print(optimal_weight(W, w))
+  File "knapsack.py", line 22, in optimal_weight
+    if d[i][wt] < val:
+UnboundLocalError: local variable 'val' referenced before assignment
+
+Correct output:
+19
+
+#2 Partitioning Souvenirs
+
+first line is the number of items, second line is v_1, v_2, v_3... etc.
+
+with the values of the items.
+
+return 1 if possible to partition all the values into 3 subsets with equal values, return 0 if not.
+
+how to split into smaller subproblems?
+
+it's not a maximization problem - it's a true/false problem?
+
+reduce to a subproblem?
+
+each either belongs to A, B, or C
+
+3 choices for first item, 3 choices for second item,
+
+3 ^ n is the number of combinations.
+
+from a problem of n items, to n-1 items.
+
+the subproblem is either balanced or it isn't.
+
+the sum of all items need to be evenly divisible by 3.
+
+for n, a_sum b_sum c_sum at n-1 need to be uneven
+
+for n-1, a_sum and b_sum are the same, and
+
+2 of the sums are the same, and 1 is exactly smaller by v_n
+
+bottom up is the iterative approach
+top down is the recursive approach
+
+when solving some subproblems, right after solving it store it into a table.
+
+# none of the values for each person could exceed sum of values / 3.
+
+# before 3 match, 2 must match first.
+
+# maybe start with guess, distribute values evenly and
+
+# get sum of all values, then divide by 3 to get the value that each person must have.
+
+# then it's simply fractional knapsack? when adding up to the total, doe it hit the multiple of that value 3 times?
+
+# fractional knapsack 3 times. not maximimum, just the exact number.
+
+4
+3 3 3 3
+
+0
+
+6
+3 3 3 3 3 3
+
+1
+
+1
+40
+
+0
+
+11
+17 59 34 57 17 23 67 1 18 2 59
+
+1
+
+17+59+ 34+ 57+ 17+ 23+ 67+ 1+ 18+ 2+ 59= 354
+354 / 3 = 118
+
+[1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1]
+[17, 59, 34, 57, 17, 23, 67, 1, 18, 2, 59]
+17+17+23+2+59 = 118
+
+[59, 34, 57, 67, 1, 18]
+
+59 + 34 +
+
+you can't break it up into 3 loops each adding up to 118, since what is used in the previous runs affects if the later runs work or not.
+
+going with all elements to the total sum, there must be one path which passes through sum/3, 2*sum/3, sum
+
+so you will search all d[len(A)][W] for the first value that is sum//3
+
+once found at a_1, wt_0, then search a_1 ... a_n, wt_0, wt_n for the next item at 2*sum//3 if found return 1
+
+if not, then return to cnt = 0 and search for the first one and throw away the path.
+
+
+
+13
+1 2 3 4 5 5 7 7 8 10 12 19 25
+
+1
+
+#3 Maximum Value of an Arithmetic Expression
+
+1+5
+
+6
+
+5-8+7*4-8+9
+
+200
+
+figure out the subexpressions for the items in parenthesis.
+
+each of the subexpressions are themselves made of 2 subexpressions.
+
+how to keep track of minimal and maximal values of subexpression?
+
+depends on the type of expression being used.
+
+whether you want subexpression 1 to be maximal or minimal.
+
+for multiplication, use the mimimal values (both negative).
+
+E_ij is the subexpression from d_i o_i to d_j o_j
+
+compute max and min values of E_ij
+
+solve all subproblems in order of increasing (j-i), order of increasing length.
+
+
+
+
+
+
+
