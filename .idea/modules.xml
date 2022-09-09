@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/01_algorithmic_toolbox.iml" filepath="$PROJECT_DIR$/.idea/01_algorithmic_toolbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/algo_sd.iml" filepath="$PROJECT_DIR$/.idea/algo_sd.iml" />
     </modules>
   </component>
 </project>
