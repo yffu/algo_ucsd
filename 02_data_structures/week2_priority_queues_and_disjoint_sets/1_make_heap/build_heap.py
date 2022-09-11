@@ -26,6 +26,7 @@ def build_heap(data):
     """Build a heap from ``data`` inplace.
 
     Returns a sequence of swaps performed by the algorithm.
+    start from floor of n/2, as everything after is a leaf node.
     """
     swaps = []
     n = len(data)//2
