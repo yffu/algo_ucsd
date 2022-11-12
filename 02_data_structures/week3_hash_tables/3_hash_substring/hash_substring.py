@@ -11,6 +11,7 @@ class Param:
     def get_hash(self, s):
         ans = 0
         for c in s:
+            # The ord() function returns an integer representing the Unicode character.
             ans = (ans * self.x + ord(c)) % self.p
         return ans % self.m
 
