@@ -11,6 +11,8 @@ class Solver:
 		self.m1 = 1000000007
 		self.m2 = 1000000009
 		self.x = randint(1, 1000000000)
+		# print(str)
+		# print(len(str))
 		self.h1 = [0] * len(str)
 		self.h2 = [0] * len(str)
 		self.xl1 = [1] * len(str)
@@ -41,6 +43,8 @@ class Solver:
 			print('xl1 pre-gen: ', self.xl1[l], sep=' ,')
 			print('xl2 pre-gen: ', self.xl2[l], sep=' ,')
 
+		# print('h1: ', self.h1, sep=', ')
+		# print(i1 + l)
 		i1h1 = (self.h1[i1 + l] - self.xl1[l] * self.h1[i1]) % self.m1
 		i2h1 = (self.h1[i2 + l] - self.xl1[l] * self.h1[i2]) % self.m1
 		i1h2 = (self.h2[i1 + l] - self.xl2[l] * self.h2[i1]) % self.m2
