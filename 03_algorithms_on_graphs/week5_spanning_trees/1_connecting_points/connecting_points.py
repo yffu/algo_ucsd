@@ -33,7 +33,7 @@ def minimum_distance(x, y):
         graph.append(v)
         for z in range(0, len(x)):
             if z in graph:
-                continue
+                continue # don't use edge to vertices that are already a part of minimum spanning tree
             d = math.sqrt(pow(x[z]-x[v], 2) + pow(y[z]-y[v], 2))
             if debug:
                 print(f"distance from {v} to {z}: {d} ")
