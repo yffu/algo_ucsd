@@ -73,9 +73,11 @@ def shortest_paths(adj, cost, s, distance, reachable, shortest):
             shortest[y] = 0
             q.append(y)
             # not just negative cycle, but anything reachable from negative cycle
+            # put negative cycle nodes into a queue to find anything reachable from those
             if Debug: print(f"x: {x}, y: {y}")
 
         if Debug: print(f"q: {q}")
+        # find anything reachable from negative cycle nodes, since these will also have negative infinity weight
         while q:
             u = q.pop(0)
             for v in adj[u]:
