@@ -11,7 +11,7 @@ def bipartite(adj):
     #a graph is bipartite if its vertices can be colored with two colors
     #(say, black and white) such that the endpoints of each edge have different colors.
     #Adapt the breadth-first search to solve this problem.
-    # 03 should return 0, it is combination of 01 and 02
+    # 03 should return 0, it is combination of 01 and 03
     # 04 should return 1, it is 04 with 6-7 edge removed
     if Debug: print("adj: " + str(adj))
     part = [-1] * len(adj)
