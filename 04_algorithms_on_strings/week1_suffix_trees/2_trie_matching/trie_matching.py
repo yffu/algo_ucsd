@@ -3,62 +3,47 @@ import sys
 debug = False
 
 
-class Node:
+class TrieNode:
 	def __init__(self):
-		self.next = list()
-		self.symbol = list()
-
-	def __str__(self):
-		return "node with id: {} labels: {} and next: {}".format(hex(id(self)), self.symbol, self.next)
-
-	def has_symbol(self, s):
-		return s in self.symbol
-
-	def get_next(self, s):
-		return self.next[self.symbol.index(s)]
-
-	def set_next(self, s, n):
-		self.symbol.append(s)
-		self.next.append(n)
-
-	def is_leaf(self):
-		return not self.next
+		self.children = [None] * 26
+		self.leaf = False
 
 
-def trie_construction(patterns):
-	trie = Node()
-	for pattern in patterns:
-		current_node = trie
-		for symbol in pattern:
-			if current_node.has_symbol(symbol):
-				current_node = current_node.get_next(symbol)
-			else:
-				new_node = Node()
-				current_node.set_next(symbol, new_node)
-				current_node = new_node
-	return trie
+class Trie:
+	def __init__(self):
+		self.root = TrieNode()
 
+	def insert(self, word: str) -> None:
+		current = self.root
+		for letter in word:
+			index = ord(letter) - ord('A')
+			if not current.children[index]:
+				current.children[index] = TrieNode()
+			current = current.children[index]
+		current.leaf = True
 
-def prefix_trie_matching(text, trie):
-	pos = 0
-	symbol = text[0]
-	v = trie
-	if debug: print("text: {}".format(text))
-	while True:
-		if debug: print("node: {} ".format(v))
-		if v.is_leaf():
-			return True
-		elif v.has_symbol(symbol):
-			v = v.get_next(symbol)
-			pos += 1
-			symbol = text[pos]
-		else:
-			return False
+	def trie_construction(self, patterns) -> None:
+		for pattern in patterns:
+			self.insert(pattern)
+
+	def prefix_trie_matching(self, word: str) -> None:
+		if debug: print(word)
+		current = self.root
+		for id, letter in enumerate(word):
+			index = ord(letter) - ord('A')
+			# scenario where word and pattern match but word is longer, check if current trie node is leaf and return if so
+			if current.leaf:
+				return True
+			if not current.children[index]:
+				return False
+			current = current.children[index]
+		# scenario where word and pattern are same length, and we need to check if last trie node is leaf before last letter in word
+		return current.leaf
 
 
 def trie_matching(text, trie, result):
 	for i in range(len(text)):
-		if prefix_trie_matching(text[i:], trie):
+		if trie.prefix_trie_matching(text[i:]):
 			result.append(i)
 
 
@@ -66,11 +51,9 @@ def solve(text, n, patterns):
 	result = []
 
 	# write your code here
-	trie = trie_construction(patterns)
-	if debug:
-		print(trie)
-		print(patterns)
-	trie_matching(text+"$", trie, result)
+	trie = Trie()
+	trie.trie_construction(patterns)
+	trie_matching(text, trie, result)
 
 	return result
 
