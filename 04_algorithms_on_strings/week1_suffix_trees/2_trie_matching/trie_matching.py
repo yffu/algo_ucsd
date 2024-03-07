@@ -68,3 +68,7 @@ if __name__ == '__main__':
 	ans = solve(text, n, patterns)
 
 	sys.stdout.write(' '.join(map(str, ans)) + '\n')
+
+"""
+https://wangyy395.medium.com/implement-a-trie-in-python-e8dd5c5fde3a
+"""
